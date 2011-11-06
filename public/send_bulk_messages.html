@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>
+QuickBase Voice Messages: Send Bulk Voice Messages
+</title>
+<link rel="stylesheet" href="/site.css" type="text/css" />
+
+<script src="/jquery-latest.js" type="text/javascript" ></script>
+<script src="/jquery.validate.js" type="text/javascript" ></script>
+<script src="/jquery.maskedinput-1.2.2.min.js" type="text/javascript" ></script>
+
+<script type='text/javascript'>
+$(document).ready(function() {       
+  $("#message_form").validate({ 
+           rules: {  
+             appdbid: { required: true },
+             dbid: { required: true },
+             username: { required: true },
+             password: { required: true }
+           },                              
+           errorPlacement: function(error, element) {
+             if ( element.is(":radio") )
+              {
+                error.prependTo( element.parent().next() );
+              }
+              else if ( element.is(":checkbox") )
+              {
+                error.appendTo ( element.next() );
+              }
+              else
+              {
+                error.prependTo( element.parent().next() );
+              }
+           }  
+    });      
+  });
+</script>
+
+</head>
+
+<body style="padding: 20px;" >
+
+<h2><a href="/home.html">QuickBase Voice Messages</a></h2>
+
+<h3>Send bulk voice messages.</h3>
+
+<p>
+Use this form to send bulk voice messages.  
+</p>
+<p>
+The messages will be sent using your  <a href="http://www.twilio.com">Twilio</a> account.  
+</p>
+<p>
+You will also need a <a href="http://www.simpleworker.com">SimpleWorker</a> account so that the messages can be sent in a background job.
+</p>
+
+<p>The QuickBase Application must have these application variables: 
+   <ol>
+   <li>simpleworker_access_key</li>
+   <li>simpleworker_secret_key</li>
+   <li>twilio_account_sid</li>
+   <li>twilio_auth_token</li>
+   <li>twilio_outbound_phone_number</li>
+   </ol>
+</p>
+
+<p>The QuickBase Table must have a 'Pending Voice Messages' report. The report must contain these fields:
+        <ol>
+        <li>Record ID#</li>
+        <li>Phone</li>
+        <li>Message</li>
+        <li>Sent</li>
+        </ol>
+</p>
+
+<p>Except for 'QuickBase Realm' and 'QuickBase Application Token', the fields below are all required. </p>
+
+<hr>
+
+<form name='message_form' id='message_form' action="/send_bulk_voice_messages" method="POST">
+<table>
+<tr>
+<td><label class='left_label' >QuickBase Username:</label></td><td><input class='text' id='username' name='username' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >QuickBase Password:</label></td><td><input class='text' id='password' name='password' type='password' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >QuickBase Application ID:</label></td><td><input class='text' id='appdbid' name='appdbid' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >QuickBase Table ID:</label></td><td><input class='text' id='dbid' name='dbid' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >QuickBase Realm:</label></td><td><input value="www" class='text' id='realm' name='realm' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >QuickBase Application Token:</label></td><td><input class='text' id='apptoken' name='apptoken' /></td>
+</tr>
+</table>
+
+<input class='leftsubmit' type="submit" value="Send Bulk Voice Messages" />
+
+</form>
+
+
+</body>
+
+
+</html>

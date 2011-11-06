@@ -1,0 +1,118 @@
+<html>
+<head>
+<title>
+QuickBase Voice Messages: Send Test Voice Message
+</title>
+<link rel="stylesheet" href="/site.css" type="text/css" />
+
+<script src="/jquery-latest.js" type="text/javascript" ></script>
+<script src="/jquery.validate.js" type="text/javascript" ></script>
+<script src="/jquery.maskedinput-1.2.2.min.js" type="text/javascript" ></script>
+
+<script type='text/javascript'>
+$(document).ready(function() {       
+  $("#message_form").validate({ 
+           rules: {  
+             account_sid: { required: true },
+             auth_token: { required: true },
+             appdbid: { required: true },
+             dbid: { required: true },
+             rid: { required: true },
+             fid: { required: true },
+             username: { required: true },
+             password: { required: true },
+             from: { required: true },
+             to: { required: true }
+           },                              
+           errorPlacement: function(error, element) {
+             if ( element.is(":radio") )
+              {
+                error.prependTo( element.parent().next() );
+              }
+              else if ( element.is(":checkbox") )
+              {
+                error.appendTo ( element.next() );
+              }
+              else
+              {
+                error.prependTo( element.parent().next() );
+              }
+           }  
+    });      
+  });
+</script>
+
+</head>
+
+<body style="padding: 20px;" >
+
+<h2><a href="/home.html">QuickBase Voice Messages</a></h2>
+
+<h3>Send a test voice message.</h3>
+
+<p>Use this form to send a test message.  The text of the message will be read from a text field in an existing QuickBase record.
+The message will be sent using your  <a href="http://www.twilio.com">Twilio</a> account.  Twilio will convert the text to an audio message and play it to the recipient at their phone number.
+</p>
+
+<p>Except for 'QuickBase Realm' and 'QuickBase Application Token', the fields below are all required. </p>
+<p>
+ If your QuickBase table has a 'voice_mail_error_message' application variable, the recipient will receive the text in that variable if an error occurs while
+ playing the message.
+</p>
+
+<p>Please enter numbers only in the Record Number, Field ID and Phone fields.
+</p>
+
+<hr>
+
+<form name='message_form' id='message_form' action="/send_message" method="POST">
+
+<table>
+<tr>
+<td><label class='left_label' >Twilio Account Secure ID:</label></td><td><input class='text' id='account_sid' name='account_sid' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >Twilio Authentication Token:</label></td><td><input class='text' id='auth_token' name='auth_token' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >Twilio Outbound Phone Number:</label></td><td><input class='text' id='from' name='from' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >Recipient's Phone Number:</label></td><td><input class='text' id='to' name='to' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >QuickBase Username:</label></td><td><input class='text' id='username' name='username' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >QuickBase Password:</label></td><td><input class='text' id='password' name='password' type='password' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >QuickBase Application ID:</label></td><td><input class='text' id='appdbid' name='appdbid' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >QuickBase Table ID:</label></td><td><input class='text' id='dbid' name='dbid' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >QuickBase Record Number:</label></td><td><input class='text' id='rid' name='rid' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >QuickBase Field ID:</label></td><td><input class='text' id='fid' name='fid' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >QuickBase Realm:</label></td><td><input value="www" class='text' id='realm' name='realm' /></td>
+</tr>
+<tr>
+<td><label class='left_label' >QuickBase Application Token:</label></td><td><input class='text' id='apptoken' name='apptoken' /></td>
+</tr>
+
+</table>
+
+<input class='leftsubmit' type="submit" value="Send Test Voice Message" />
+
+</form>
+
+
+</body>
+
+
+</html>

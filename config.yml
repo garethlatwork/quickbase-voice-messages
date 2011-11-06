@@ -1,0 +1,2 @@
+development_url: http://localhost:4567
+production_url: https://quickbase-voice-messages.herokuapp.com
