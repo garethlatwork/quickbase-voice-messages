@@ -1,7 +1,7 @@
-require 'simple_worker'
+require 'iron_worker'
 require 'httparty'
 
-class SendMessageJob < SimpleWorker::Base
+class SendMessageJob < IronWorker::Base
   attr_accessor :url
   attr_accessor :params
   def run
