@@ -103,7 +103,7 @@ end
 
 def send_bulk_voice_messages(params,url)
    begin
-      ret = "<h2>Bulk messages are being sent in the background using <a href=\"http://www.simpleworker.com\">SimpleWorker</a></h2>"
+      ret = "<h2>Bulk messages are being sent in the background using <a href=\"http://www.iron.io/products/worker\">IronWorker</a></h2>"
       qbc = get_qbc(params)
       qbc.getSchema(params[:appdbid])
       if qbc.requestSucceeded
